@@ -7,7 +7,7 @@ const headEl = document.getElementById('head');
 const middleEl = document.getElementById('middle');
 const bottomEl = document.getElementById('bottom');
 const reportEl = document.getElementById('report');
-const chatchphrasesEl = document.getElementById('chatchphrases');
+const catchphrasesEl = document.getElementById('catchphrases');
 const catchphraseInput = document.getElementById('catchphrase-input');
 const catchphraseButton = document.getElementById('catchphrase-button');
 
@@ -72,30 +72,26 @@ bottomDropdown.addEventListener('change', () => {
 });
 
 catchphraseButton.addEventListener('click', () => {
-    // get the value of the catchphrase input
-    
-    // push the new catchphrase to the catchphrase array in state
-    // update the dom for the bottom
-    // clear out the form input's value so it's empty to the user
-    // update the dom to show the new catchphrases (call a function to do this work)
-
+    let phrase = catchphraseInput.value;
+    phraseArray.push(phrase);
+    catchphraseInput.value = '';
+    console.log(phraseArray);
+    displayCatchphrases();
 });
 
 function displayStats() {
-    // change the text contentof the reportEl to tell the user how many times they've changed each piece of the state
     let span = document.createElement('span');
-
     reportEl.append(span);
-
     const statsString = makeStatsString(topChange, midChange, btmChange); // call this function with the correct arguments
     span.textContent = statsString;
 }
 
 function displayCatchphrases() {
-    // clear out the DOM for the currently displayed catchphrases
-
-    // loop through each catchphrase in state
-    // and for each catchphrase
-    // create an HTML element with the catchphrase as its text content
-    // and append that HTML element to the cleared-out DOM
+    catchphrasesEl.textContent = '';
+    for (let i in phraseArray) {
+        let p = document.createElement('p');
+        p.classList = ('catchphrase');
+        p.textContent = phraseArray[i];
+        catchphrasesEl.append(p);
+    }
 }
