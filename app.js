@@ -15,6 +15,7 @@ const catchphraseButton = document.getElementById('catchphrase-button');
 let topChange = 0;
 let midChange = 0;
 let btmChange = 0;
+
 // set state for all of the character's catchphrases
 const phraseArray = [];
 
@@ -23,6 +24,9 @@ headDropdown.addEventListener('change', () => {
     let id = headDropdown.value;
     // increment the head change count state
     topChange++;
+    headEl.textContent = '';
+    reportEl.textContent = '';
+
     // update the dom for the head
     let img = document.createElement('img');
     img.src = `./assets/${id}-head.png`;
@@ -30,29 +34,41 @@ headDropdown.addEventListener('change', () => {
 
     headEl.append(img);
     // update the stats to show the new count
-    chatchphrasesEl.textContent = topChange;
+    displayStats();
 });
 
 
 middleDropdown.addEventListener('change', () => {
-    // get the value of the middle dropdown
+    let id = middleDropdown.value;
 
-    // increment the middle change count state
-    
-    // update the dom for the middle
+    midChange++;
+    middleEl.textContent = '';
+    reportEl.textContent = '';
 
-    // update the stats to show the new count
+    let img = document.createElement('img');
+    img.src = `./assets/${id}-middle.png`;
+    img.classList = 'imgsize';
+
+    middleEl.append(img);
+
+    displayStats();
 });
 
 
 bottomDropdown.addEventListener('change', () => {
-    // get the value of the bottom dropdown
+    let id = bottomDropdown.value;
 
-    // increment the bottom change count state
-    
-    // update the dom for the bottom
+    btmChange++;
+    bottomEl.textContent = '';
+    reportEl.textContent = '';
 
-    // update the stats to show the new count
+    let img = document.createElement('img');
+    img.src = `./assets/${id}-pants.png`;
+    img.classList = 'imgsize';
+
+    bottomEl.append(img);
+
+    displayStats();
 });
 
 catchphraseButton.addEventListener('click', () => {
@@ -67,7 +83,12 @@ catchphraseButton.addEventListener('click', () => {
 
 function displayStats() {
     // change the text contentof the reportEl to tell the user how many times they've changed each piece of the state
-    const statsString = makeStatsString(); // call this function with the correct arguments
+    let span = document.createElement('span');
+
+    reportEl.append(span);
+
+    const statsString = makeStatsString(topChange, midChange, btmChange); // call this function with the correct arguments
+    span.textContent = statsString;
 }
 
 function displayCatchphrases() {
